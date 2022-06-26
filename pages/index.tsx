@@ -44,8 +44,43 @@ const Home: NextPage = () => {
             <div>Connect Wallet</div>
           </div>
           <div className={styles.site_pick_image_section}>
-            
+            <h3>Site Pick</h3>
+            <div className={styles.images}>
+              {/* <Image src={"/stairs.jpeg"} width={300} height={300}/> */}
+              <div
+                className={styles.img1}
+                style={{ backgroundImage: "url(/stairs.jpeg)" }}
+              ></div>
+              <div
+                className={styles.img2}
+                style={{ backgroundImage: "url(/stairs.jpeg)" }}
+              ></div>
+              <div
+                className={styles.img2}
+                style={{ backgroundImage: "url(/stairs.jpeg)" }}
+              ></div>
+            </div>
+            <div className={styles.property_info}>
+              <h3>Deluxe Rooms, Lekki Phase 2</h3>
+              <p>
+                Fully furnished 3 bedroom deluxe apartment in Lekki. Lorem ipsum
+                dolor sit amet consectetur adipisicing elit. Dolore sed veniam
+                asperiores quae corrupti fugiat deserunt aperiam sequi
+                voluptate, explicabo perspiciatis cumque quia blanditiis?
+                Voluptate ullam dolor veniam debitis maiores?
+              </p>
+              <div>
+                <span>
+                  Listed By: <Link href="">John Doe</Link>
+                </span>
+                <p>List Price: 1000 Algo</p>
+              </div>
+              <div className={styles.details}>View Details</div>
+            </div>
           </div>
+        </section>
+        <section className={styles.top_propertes}>
+          <h3>Top Properties</h3>
         </section>
       </main>
 

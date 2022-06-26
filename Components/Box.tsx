@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
-const Box = (props:PropsWithChildren && {img}) => {
-    const {img} =props
+const Box = (props:PropsWithChildren) => {
   return (
     <div  {...props} >Box</div>
   )
