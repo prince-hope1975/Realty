@@ -17,6 +17,7 @@
     min-height: 100vh;
     color: white;
     background-image: url(/hero.jpeg);
+    background-position: center center;
     background-size: cover;
     display: grid;
     place-content: center;
@@ -61,13 +62,14 @@
             color: black;
             width: 4rem;
             background: none;
+            cursor: pointer;
         }
     }
 }
 
 .site_picks {
     min-height: 100vh;
-    width: 100vw;
+    max-width: 100vw;
     padding: 0.5rem 4rem; // background: #000;
     .head {
         display: flex;
@@ -106,6 +108,7 @@
             width: 50%;
             height: 100%;
             background-size: cover;
+            background-position: center center;
             border-radius: 5px;
         }
         .img2 {
@@ -113,6 +116,7 @@
             height: 100%;
             background-size: cover;
             border-radius: 5px;
+            background-position: center center;
         }
     }
     .property_info {
@@ -120,7 +124,7 @@
         flex-direction: column;
         gap: 1rem;
         padding: 0;
-        padding-right: 15rem;
+        // padding-right: 15rem;
         margin: 0;
         h3 {
             padding: 0;

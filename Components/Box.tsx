@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 
 const Box = (props:PropsWithChildren) => {
-  return (
+   return (
     <div  {...props} >Box</div>
   )
 }
