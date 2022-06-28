@@ -2,12 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import {AiOutlineArrowRight} from "react-icons/ai";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import styles from "../styles/Home.module.scss";
-import Box from "../Components/Box";
+import Box, { DisplayBoxes } from "../Components/Box";
 import SwipableSection from "../Components/Swippable";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
+import Footer from "../Components/Footer";
 
 const Home: NextPage = () => {
   const matches = useMediaQuery("(min-width: 400px)");
@@ -86,38 +86,41 @@ const Home: NextPage = () => {
         </section>
         <section className={styles.top_propertes}>
           <h3>Top Properties</h3>
-          {matches? <div className={styles.show_case}>
-            <Box  {...data}/>
-            <Box  {...data}/>
-            <Box  {...data}/>
-            <Box  {...data}/>
-          </div>: <SwipableSection/>}
+          {matches ? (
+            <div className={styles.show_case}>
+              <Box {...data} />
+              <Box {...data} />
+              <Box {...data} />
+              <Box {...data} />
+            </div>
+          ) : (
+            <SwipableSection />
+          )}
         </section>
         <section className={styles.collector}>
-          <div className={styles.title}>Be a Collector</div>
+          <div className={styles.collector_title}>Be a Collector</div>
+          <div className={styles.boxes}>
+            {boxData.map((prop)=>{
+              return <DisplayBoxes key={prop.head} {...prop}/>
+            })}
+          </div>
         </section>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+   <Footer />
     </div>
   );
 };
-const data ={
-    img: "/dummy.png",
-    price: 100,
-    time_in_secs: 10000000,
-    desc: "This is the alt",
-    owner: "prince Charles"
-}
+const data = {
+  img: "/dummy.png",
+  price: 100,
+  time_in_secs: 10000000,
+  desc: "This is the alt",
+  owner: "prince Charles",
+};
+const boxData = [
+  { head: "connect", text: "Connect with supported wallets." },
+  { head: "Buy", text: "Buy properties on the blockchain." },
+  { head: "Sell", text: "Your Properties will shine in our marketplace." },
+];
 export default Home;

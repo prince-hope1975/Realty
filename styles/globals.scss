@@ -1,9 +1,14 @@
 :root {
     --lg-font: 3.5rem;
+    --md-font: 2.5rem;
     --screen-pd: 0.5rem 1rem;
+    --colector-lg: 1.5rem;
+    --colector-font: 0.8rem;
     @media (min-width: 400px) {
         --lg-font: 6.5rem;
         --screen-pd: 0.5rem 4rem;
+        --colector-lg: 2rem;
+        --colector-font: 1rem;
     }
 }
 
