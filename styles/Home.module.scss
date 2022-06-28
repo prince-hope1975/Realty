@@ -28,6 +28,8 @@
         width: 100%;
         height: 100%;
         position: absolute;
+        top: 0;
+        left: 0;
         background-color: rgba(0, 0, 0, 0.2);
     }
     h1 {
@@ -72,7 +74,7 @@
     min-height: 100vh;
     max-width: 100vw;
     overflow: hidden;
-    padding: 0.5rem 4rem; // background: #000;
+    padding: var(--screen-pd); // background: #000;
     .head {
         display: flex;
         align-items: center;
@@ -100,7 +102,7 @@
 }
 
 .site_pick_image_section {
-    min-height: 720px;
+    // min-height: 720px;
     // background: #000;
     .images {
         // min-height: 500px;

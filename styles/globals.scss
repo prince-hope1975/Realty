@@ -1,7 +1,9 @@
 :root {
     --lg-font: 3.5rem;
+    --screen-pd: 0.5rem 1rem;
     @media (min-width: 400px) {
         --lg-font: 6.5rem;
+        --screen-pd: 0.5rem 4rem;
     }
 }
 
