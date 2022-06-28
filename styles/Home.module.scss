@@ -71,6 +71,7 @@
 .site_picks {
     min-height: 100vh;
     max-width: 100vw;
+    overflow: hidden;
     padding: 0.5rem 4rem; // background: #000;
     .head {
         display: flex;
@@ -116,7 +117,7 @@
             grid-column: span 2;
         }
         .img2 {
-            min-width: 100px;
+            // min-width: 100px;
             height: 500px;
             background-size: cover;
             border-radius: 5px;
