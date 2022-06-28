@@ -82,10 +82,10 @@
         justify-content: space-between;
         text-align: center;
         ul {
-            font-size: .8rem;
+            font-size: 0.8rem;
             list-style: none;
             display: flex;
-            gap: .5rem;
+            gap: 0.5rem;
             padding: 0;
             li {
                 list-style: none;
@@ -96,7 +96,7 @@
             color: hsl(220, 95%, 40%);
         }
         div {
-            font-size: .8rem;
+            font-size: 0.8rem;
         }
     }
 }
@@ -171,6 +171,24 @@
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
     h3 {}
+}
+
+.collector {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--screen-pd);
+    color: black;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 4rem;
+    .title {
+        font-size: 1.5rem;
+        width: 100%;
+        text-align: left;
+    }
 }
 
 .box {

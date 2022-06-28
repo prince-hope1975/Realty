@@ -5,8 +5,12 @@ import Link from "next/link";
 import {AiOutlineArrowRight} from "react-icons/ai";
 import styles from "../styles/Home.module.scss";
 import Box from "../Components/Box";
+import SwipableSection from "../Components/Swippable";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 const Home: NextPage = () => {
+  const matches = useMediaQuery("(min-width: 400px)");
   return (
     <div className={styles.container}>
       <Head>
@@ -82,12 +86,15 @@ const Home: NextPage = () => {
         </section>
         <section className={styles.top_propertes}>
           <h3>Top Properties</h3>
-          <div className={styles.show_case}>
+          {matches? <div className={styles.show_case}>
             <Box  {...data}/>
             <Box  {...data}/>
             <Box  {...data}/>
             <Box  {...data}/>
-          </div>
+          </div>: <SwipableSection/>}
+        </section>
+        <section className={styles.collector}>
+          <div className={styles.title}>Be a Collector</div>
         </section>
       </main>
 
