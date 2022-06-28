@@ -101,19 +101,22 @@
     min-height: 720px;
     // background: #000;
     .images {
-        height: 500px;
-        display: flex;
+        // min-height: 500px;
+        display: grid;
         gap: 1rem;
+        padding: 0.3rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         .img1 {
-            width: 50%;
-            height: 100%;
+            // width: clamp(200px, 50%, 300px);
+            min-height: 500px;
             background-size: cover;
             background-position: center center;
             border-radius: 5px;
+            grid-column: span 2;
         }
         .img2 {
-            width: 25%;
-            height: 100%;
+            min-width: 100px;
+            height: 500px;
             background-size: cover;
             border-radius: 5px;
             background-position: center center;
@@ -124,7 +127,7 @@
         flex-direction: column;
         gap: 1rem;
         padding: 0;
-        // padding-right: 15rem;
+        width: clamp(250px, 80%, 450px);
         margin: 0;
         h3 {
             padding: 0;
