@@ -13,7 +13,8 @@
 }
 
 .hero {
-    width: 100%;
+    width: 100vw;
+    margin: 0;
     min-height: 100vh;
     color: white;
     background-image: url(/hero.jpeg);
