@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {AiOutlineArrowRight} from "react-icons/ai";
 import styles from "../styles/Home.module.scss";
+import Box from "../Components/Box";
 
 const Home: NextPage = () => {
   return (
@@ -81,6 +82,12 @@ const Home: NextPage = () => {
         </section>
         <section className={styles.top_propertes}>
           <h3>Top Properties</h3>
+          <div className={styles.show_case}>
+            <Box  {...data}/>
+            <Box  {...data}/>
+            <Box  {...data}/>
+            <Box  {...data}/>
+          </div>
         </section>
       </main>
 
@@ -99,5 +106,11 @@ const Home: NextPage = () => {
     </div>
   );
 };
-
+const data ={
+    img: "/dummy.png",
+    price: 100,
+    time_in_secs: 10000000,
+    desc: "This is the alt",
+    owner: "prince Charles"
+}
 export default Home;

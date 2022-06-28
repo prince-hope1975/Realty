@@ -161,7 +161,64 @@
 
 .top_propertes {
     margin-top: 4rem;
+    width: 100%;
+    padding: var(--screen-pd);
+    .show_case {
+        display: grid;
+        // grid-template-columns: ;
+        gap: 1rem;
+        padding: 0.3rem;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
     h3 {}
+}
+
+.box {
+    min-height: calc(40vh + 100px);
+    width: 100%;
+    max-width: 303px;
+    display: flex;
+    flex-direction: column;
+    background: rgb(25, 25, 25);
+    border-radius: 15px;
+    overflow: hidden;
+    margin: auto;
+    .img {
+        width: 100%;
+        aspect-ratio: 1/1.1;
+        min-height: 70%;
+        background: white;
+        background-size: cover;
+        background-position: center center;
+        border-radius: 5px;
+        // background: #000;
+    }
+    .desc {
+        padding: 1rem;
+        color: white;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        // grid-template-rows: 2.4rem;
+        gap: 2rem 3rem;
+        .owner {
+            grid-column: span 2;
+        }
+        .secondary_area {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            &:last-of-type {
+                text-align: end;
+            }
+            span {
+                color: hsl(0, 0%, 40%);
+                font-size: 0.9rem;
+            }
+            span :last-of-type {
+                text-align: end;
+            }
+        }
+    }
 }
 
 .footer {
