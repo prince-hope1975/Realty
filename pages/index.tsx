@@ -66,7 +66,7 @@ const Home: NextPage = () => {
               ></div>
             </div>
             <div className={styles.property_info}>
-              <h3>Deluxe Rooms, Lekki Phase 2</h3>
+              <h4>Deluxe Rooms, Lekki Phase 2</h4>
               <p>
                 Fully furnished 3 bedroom deluxe apartment in Lekki. Lorem ipsum
                 dolor sit amet consectetur adipisicing elit. Dolore sed veniam
@@ -91,23 +91,22 @@ const Home: NextPage = () => {
               <Box {...data} />
               <Box {...data} />
               <Box {...data} />
-              <Box {...data} />
             </div>
           ) : (
             <SwipableSection />
           )}
         </section>
         <section className={styles.collector}>
-          <div className={styles.collector_title}>Be a Collector</div>
+          <h3 className={styles.collector_title}>Be a Collector</h3>
           <div className={styles.boxes}>
-            {boxData.map((prop)=>{
-              return <DisplayBoxes key={prop.head} {...prop}/>
+            {boxData.map((prop) => {
+              return <DisplayBoxes key={prop.head} {...prop} />;
             })}
           </div>
         </section>
       </main>
 
-   <Footer />
+      <Footer />
     </div>
   );
 };

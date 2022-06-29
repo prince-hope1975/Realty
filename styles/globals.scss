@@ -1,10 +1,13 @@
 :root {
     --lg-font: 3.5rem;
-    --md-font: 2.5rem;
+    --md-font: 1.5rem;
     --screen-pd: 0.5rem 1rem;
     --colector-lg: 1.5rem;
     --colector-font: 0.8rem;
+    --head-font: 1.3rem;
     @media (min-width: 400px) {
+        --md-font: 2.5rem;
+        --head-font: 2rem;
         --lg-font: 6.5rem;
         --screen-pd: 0.5rem 4rem;
         --colector-lg: 2rem;
@@ -17,6 +20,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    overflow-x: hidden;
 }
 
 a {
