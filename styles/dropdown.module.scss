@@ -1,0 +1,29 @@
+.dropdown {
+    max-width: 100%;
+    // min-height: 4rem;
+    padding: 0.7rem 0.5rem;
+    &>div {
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        span {
+            display: flex;
+            align-items: center;
+        }
+    }
+    // background: #000;
+    min-height: fit-content;
+    ul {
+        display: flex;
+        font-size: 0.8rem;
+        // height: fit-content;
+        background: hsl(0, 0%, 20%, 0.06);
+        overflow: hidden;
+        flex-direction: column;
+        margin: 0;
+        margin-left: -0.5rem;
+        padding: 0;
+        list-style: none;
+    }
+}

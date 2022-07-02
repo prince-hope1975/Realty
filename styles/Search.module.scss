@@ -1,0 +1,26 @@
+.main {
+    min-height: 100vh;
+    padding: var(--screen-pd);
+    .grid {
+        margin-top: 3rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: clamp(150px, 30%, 250px) 1fr 1fr;
+        .nav {}
+        .layout {
+            grid-column: span 2;
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+    }
+    .nav {
+        padding: 0;
+        margin: 0;
+        // background: #000;
+        h2 {
+            padding: 0;
+            margin: 0;
+        }
+    }
+}

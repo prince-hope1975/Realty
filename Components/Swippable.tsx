@@ -48,12 +48,12 @@ function SwipeableTextMobileStepper() {
       enableMouseEvents
     >
       {data.map((item, index) => (
-        <div key={item.desc}>
+        <>
           {Math.abs(activeStep - index) <= 2 ? (
 
-           <Box {...item}/>
+           <Box {...item} key={item.desc + index}/>
           ) : null}
-        </div>
+        </>
       ))}
     </AutoPlaySwipeableViews>
   );

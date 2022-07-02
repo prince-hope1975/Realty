@@ -1,18 +1,26 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import styles from "../styles/Home.module.scss";
-import Box, { DisplayBoxes } from "../Components/Box";
+import Box, { DisplayBoxes, Box2 } from "../Components/Box";
 import SwipableSection from "../Components/Swippable";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Footer from "../Components/Footer";
+import Navbar from "../Components/Navbar";
+import { useEffect, useState } from "react";
+import Layout from "../Components/Layout";
+import Select from "../Components/Select";
+import { motion } from "framer-motion";
 
 const Home: NextPage = () => {
   const matches = useMediaQuery("(min-width: 400px)");
+  const [state, setStat] = useState(false);
+  useEffect(() => {
+    window.localStorage.setItem("current_wallet", "");
+  }, []);
   return (
-    <div className={styles.container}>
+    <Layout className={styles.container}>
       <Head>
         <title>Realty</title>
         <meta
@@ -33,21 +41,7 @@ const Home: NextPage = () => {
           <div className={styles.bg}></div>
         </section>
         <section className={styles.site_picks}>
-          <div className={styles.head}>
-            <ul>
-              <li>
-                <Link href="">Search</Link>
-              </li>
-              <li>
-                <Link href="">List</Link>
-              </li>
-              <li>
-                <Link href="">Buy</Link>
-              </li>
-            </ul>
-            <h2>Realty.</h2>
-            <div>Connect Wallet</div>
-          </div>
+          <Navbar />
           <div className={styles.site_pick_image_section}>
             <h3>Site Pick</h3>
             <div className={styles.images}>
@@ -107,10 +101,10 @@ const Home: NextPage = () => {
       </main>
 
       <Footer />
-    </div>
+    </Layout>
   );
 };
-const data = {
+export const data = {
   img: "/dummy.png",
   price: 100,
   time_in_secs: 10000000,
