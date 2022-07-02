@@ -14,7 +14,7 @@ const Search = () => {
         <div className={styles.nav}>
           <div className={styles.stick}>
             {data.map((props) => {
-             return <DropDown data={props}/>
+             return <DropDown key={props.name} data={props}/>
             })}
           </div>
         </div>
