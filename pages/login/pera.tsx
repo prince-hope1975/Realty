@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useGlobalContext } from "../../context";
 const reach = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"));
 
-const pera = () => {
+const Pera = () => {
   const { appState, dispatch,state, setState } = useGlobalContext();
   const router = useRouter();
   useEffect(() => {
@@ -32,4 +32,4 @@ const pera = () => {
   return <div onClick={() => reach.getDefaultAccount()}>pera</div>;
 };
 
-export default pera;
+export default Pera;

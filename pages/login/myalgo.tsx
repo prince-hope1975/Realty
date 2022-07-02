@@ -6,7 +6,7 @@ import { useGlobalContext } from "../../context";
 import { useRouter } from "next/router";
 import Layout from "../../Components/Layout";
 
-const myalgo = () => {
+const Myalgo = () => {
   const { appState, dispatch,state, setState } = useGlobalContext();
   const Router = useRouter();
   useEffect(() => {
@@ -34,4 +34,4 @@ const myalgo = () => {
   return <div onClick={() => reach.getDefaultAccount()}>myalgo</div>;
 };
 
-export default myalgo;
+export default Myalgo;
