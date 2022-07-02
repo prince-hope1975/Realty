@@ -13,19 +13,20 @@ const Search = () => {
       <div className={styles.grid}>
         <div className={styles.nav}>
           <div className={styles.stick}>
-            <DropDown data={data[0]} />
-            <DropDown data={data[0]} />
-            <DropDown data={data[0]} />
+            {data.map((props) => {
+             return <DropDown data={props}/>
+            })}
           </div>
         </div>
         <div className={styles.layout}>
-          <Box2 {...Data} />
-          <Box2 {...Data} />
-          <Box2 {...Data} />
-          <Box2 {...Data} />
-          <Box2 {...Data} />
-          <Box2 {...Data} />
-          <Box2 {...Data} />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
+          <Box2 {...Data}  img= "/hero.jpeg" />
         </div>
       </div>
     </Layout>

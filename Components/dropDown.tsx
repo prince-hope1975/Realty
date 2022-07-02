@@ -1,8 +1,8 @@
-import React from 'react'
-import { motion } from 'framer-motion';
-import styles from '../styles/dropdown.module.scss';
+import React from "react";
+import { motion } from "framer-motion";
+import styles from "../styles/dropdown.module.scss";
 import { Checkbox } from "@mui/material";
-import {BsChevronCompactDown} from 'react-icons/bs'
+import { BsChevronCompactDown } from "react-icons/bs";
 
 const dropDown = ({
   data,
@@ -17,7 +17,13 @@ const dropDown = ({
   return (
     <motion.div className={styles.dropdown}>
       <div onClick={() => setState(!state)}>
-        {data.name} <motion.span animate={{rotate:!state?180:0, }} transition={{duration:0.3}}><BsChevronCompactDown /></motion.span>
+        {data.name}{" "}
+        <motion.span
+          animate={{ rotate: !state ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <BsChevronCompactDown />
+        </motion.span>
       </div>
       <motion.ul
         animate={{
@@ -40,4 +46,4 @@ const dropDown = ({
   );
 };
 
-export default dropDown
+export default dropDown;

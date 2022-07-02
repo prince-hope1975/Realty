@@ -12,7 +12,9 @@ const Navbar = (
   const { Component } = props;
   return (
     <div {...props} className={`${styles.head} ${props.className}`}>
-      {Component? Component  :(
+      {Component ? (
+        Component
+      ) : (
         <ul>
           <li>
             <Link href="search">Search</Link>
@@ -25,7 +27,9 @@ const Navbar = (
           </li>
         </ul>
       )}
-      <h2>Realty.</h2>
+      <h2>
+        <Link href={"/"}>Realty</Link>.
+      </h2>
       <div>
         <Link href={!props.link ? "login" : props.link}>Connect Wallet</Link>
       </div>
