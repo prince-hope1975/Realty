@@ -5,6 +5,7 @@ import SwipeableViews from "react-swipeable-views";
 // @ts-ignore
 import { autoPlay } from "react-swipeable-views-utils";
 import Box from "./Box";
+import data from "../data/data";
 // @ts-ignore
 import styles from "../styles/Home.module.scss";
 
@@ -47,7 +48,7 @@ function SwipeableTextMobileStepper() {
       onChangeIndex={handleStepChange}
       enableMouseEvents
     >
-      {data.map((item, index) => (
+      {data.nft_data.map((item, index) => (
         <>
           {Math.abs(activeStep - index) <= 2 ? (
 
@@ -61,34 +62,5 @@ function SwipeableTextMobileStepper() {
 
 
 
-const data = [
-  {
-    img: "/dummy.png",
-    price: 100,
-    time_in_secs: 10000000,
-    desc: "This is the alt",
-    owner: "prince Charles",
-  },
-  {
-    img: "/dummy.png",
-    price: 100,
-    time_in_secs: 10000000,
-    desc: "This is the alt",
-    owner: "prince Charles",
-  },
-  {
-    img: "/dummy.png",
-    price: 100,
-    time_in_secs: 10000000,
-    desc: "This is the alt",
-    owner: "prince Charles",
-  },
-  {
-    img: "/dummy.png",
-    price: 100,
-    time_in_secs: 10000000,
-    desc: "This is the alt",
-    owner: "prince Charles",
-  },
-];
+
 export default SwipableSection;

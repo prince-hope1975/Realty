@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 const Box = (
   props: PropsWithChildren & {
+    id:string,
     img: string;
     price: number;
     time_in_secs: number;
@@ -38,8 +39,10 @@ const Box = (
       clearInterval(myInterval);
     };
   });
+  const router = useRouter()
   return (
     <motion.div
+    onClick={()=>{router.push(`/item/${props.id}`)}}
       animate={{ x: [-200, 0], opacity: [0, 1]  }}
       transition={{ delay: 1,duration:1 }}
       {...props}
@@ -66,6 +69,7 @@ const Box = (
 };
 export const Box2 = (
   props: PropsWithChildren & {
+    id: string;
     img: string;
     price: number;
     desc: string;
@@ -73,9 +77,16 @@ export const Box2 = (
   }
 ) => {
   const { img, price, owner, desc } = props;
+  const router = useRouter()
 
   return (
-    <div {...props} className={styles.box_2}>
+    <div
+      {...props}
+      className={styles.box_2}
+      onClick={() => {
+        router.push(`/item/${props.id}`);
+      }}
+    >
       {/* <img src={img} alt=""/> */}
       <div
         className={styles.img}
@@ -86,7 +97,7 @@ export const Box2 = (
           <span>Home # {1} </span> <p>@{owner}</p>
         </div>
         <div className={styles.secondary_area}>
-          <span>Price</span>  {price} Algo
+          <span>Price</span> {price} Algo
         </div>
         <div className={styles.secondary_area}>
           <span>Highest Bid</span> {price} Algo

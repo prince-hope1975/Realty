@@ -10,8 +10,7 @@ import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
-import Select from "../Components/Select";
-import { motion } from "framer-motion";
+import data from "../data/data";
 
 const Home: NextPage = () => {
   const matches = useMediaQuery("(min-width: 400px)");
@@ -82,9 +81,9 @@ const Home: NextPage = () => {
           <h3>Top Properties</h3>
           {matches ? (
             <div className={styles.show_case}>
-              <Box {...data} />
-              <Box {...data} />
-              <Box {...data} />
+              {data.nft_data.map((props)=>{
+                return <Box {...props} />
+              })}
             </div>
           ) : (
             <SwipableSection />
@@ -104,13 +103,7 @@ const Home: NextPage = () => {
     </Layout>
   );
 };
-export const data = {
-  img: "/dummy.png",
-  price: 100,
-  time_in_secs: 10000000,
-  desc: "This is the alt",
-  owner: "prince Charles",
-};
+
 const boxData = [
   { head: "connect", text: "Connect with supported wallets." },
   { head: "Buy", text: "Buy properties on the blockchain." },
