@@ -22,7 +22,7 @@ const Search = () => {
         <div className={styles.layout}>
           {data.nft_data.map((props)=>{
             if (Number(props.id) < 9) return;
-            return <Box2 {...props}/>
+            return <Box2 key={props.id} {...props}/>
           })}
         </div>
       </div>
