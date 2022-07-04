@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 
-const searchComp = () => {
+const searchComp = (props: PropsWithChildren & {className?: string}) => {
   return (
-      <Search>
+      <Search {...props}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>

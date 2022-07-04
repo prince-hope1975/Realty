@@ -1,0 +1,85 @@
+.layout {
+    .nav {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1rem;
+        gap: 3rem;
+        border-bottom: 1px solid hsl(0, 0%, 40%, 0.2);
+        h2 {
+            padding: 0;
+            margin: 0;
+        }
+        .search {
+            max-width: 13rem;
+        }
+    }
+    .grid {
+        margin: 1rem 1.7rem;
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        &>div {
+            &:last-of-type {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem
+            }
+            aspect-ratio: 1;
+            padding: 0.5rem;
+            .owner {
+                margin-top: 1rem;
+                display: flex;
+                align-items: center;
+                height: fit-content;
+                gap: 1ch;
+                font-size: 0.7rem;
+                p {
+                    padding: 0;
+                    margin: 0;
+                    color: blue;
+                }
+                .time {
+                    // background: #000;
+                    border-radius: 5px;
+                    padding: 2px;
+                    color: hsl(0, 0%, 100%);
+                    background: hsl(0, 0%, 30%, 0.5);
+                    font-size: 0.6rem;
+                }
+            }
+            .home_details {
+                font-size: 1.7rem;
+                font-weight: bold;
+                display: flex;
+                gap: 1.4rem;
+                justify-content: space-between;
+                span {
+                    display: flex;
+                    gap: 2px;
+                    button {
+                        border-radius: 5px;
+                        border: 1px solid hsl(0, 0%, 20%, .2);
+                        padding: 0;
+                        display: flex;
+                        gap: 3px;
+                    }
+                }
+            }
+            .img_container {
+                padding: 0.5rem;
+                width: 100%;
+                border: 1px solid hsl(0, 0%, 20%, 0.1);
+                border-radius: 5px;
+                aspect-ratio: 1;
+                .img {
+                    // background: #000;
+                    background-image: url(/hero.jpeg);
+                    background-position: center center;
+                    background-size: cover;
+                    height: 100%;
+                    // margin: .5rem;
+                }
+            }
+        }
+    }
+}

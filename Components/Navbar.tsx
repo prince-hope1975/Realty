@@ -31,7 +31,7 @@ const Navbar = (
         <Link href={"/"}>Realty</Link>.
       </h2>
       <div>
-        <Link href={!props.link ? "login" : props.link}>Connect Wallet</Link>
+        <Link href={!props.link ? "/login" : props.link}>Connect Wallet</Link>
       </div>
     </div>
   );

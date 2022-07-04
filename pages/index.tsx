@@ -82,7 +82,7 @@ const Home: NextPage = () => {
           {matches ? (
             <div className={styles.show_case}>
               {data.nft_data.map((props)=>{
-                return <Box {...props} />
+                return <Box key={props.id + props.desc} {...props} />
               })}
             </div>
           ) : (
