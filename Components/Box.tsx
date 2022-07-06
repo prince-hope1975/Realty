@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from "react";
 import styles from "../styles/Box.module.scss";
 import { useRouter } from "next/router";
 import { useGlobalContext } from "../context";
-import { motion } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 
 const Box = (
   props: PropsWithChildren & {
@@ -41,10 +41,8 @@ const Box = (
   const router = useRouter();
   return (
     <motion.div
-      // whileInView={{ opacity: 1, }}  
-      onClick={() => {
-        router.push(`/item/${props.id}`);
-      }}
+      // whileInView={{ opacity: 1, }}
+
       animate={{ x: [-200, 0], opacity: [0, 1] }}
       transition={{ delay: 1, duration: 1 }}
       {...props}
@@ -54,7 +52,12 @@ const Box = (
         className={styles.img}
         style={{ backgroundImage: `url(${img})` }}
       ></div>
-      <div className={styles.desc}>
+      <div
+        className={styles.desc}
+        onClick={() => {
+          router.push(`/item/${props.id}`);
+        }}
+      >
         <div className={styles.owner}>
           <span>owner</span> : @{owner}
         </div>
@@ -69,30 +72,30 @@ const Box = (
   );
 };
 export const Box2 = (
-  props: PropsWithChildren & {
+  props: PropsWithChildren & MotionProps & {
     id: string;
     img: string;
     price: number;
     desc: string;
     owner: string;
+    className?: string;
   }
 ) => {
-  const { img, price, owner, desc, id } = props;
+  const { img, price, owner, desc, id, className } = props;
   const router = useRouter();
 
   return (
-    <div
-      {...props}
-      className={styles.box_2}
-      onClick={() => {
-        router.push(`/item/${props.id}`);
-      }}
-    >
+    <motion.div {...props} className={`${styles.box_2} ${className}`}>
       <div
         className={styles.img}
         style={{ backgroundImage: `url(${img})` }}
       ></div>
-      <div className={styles.desc}>
+      <div
+        className={styles.desc}
+        onClick={() => {
+          router.push(`/item/${props.id}`);
+        }}
+      >
         <div className={styles.owner}>
           <span>Home # {id} </span> <p>@{owner}</p>
         </div>
@@ -103,7 +106,7 @@ export const Box2 = (
           <span>Highest Bid</span> {price} Algo
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

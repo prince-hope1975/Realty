@@ -154,16 +154,25 @@
             }
         }
     }
-    .carousel {
+    .display {
         padding: 2rem;
         // background: #000;
         width: 100%;
         height: 30rem;
         grid-column: span 2;
-        .display {
-            display: block;
-            // overflow-x: scroll;
-            max-width: 100%;
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            .innerCrousel {
+                display: flex;
+                gap: .5rem;
+                // overflow: hidden;
+                // overflow-x: scroll;
+            }
+            .box {
+                min-width: 15rem;
+                cursor: grab;
+            }
             &>div {
                 flex-grow: 1;
             }

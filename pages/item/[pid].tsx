@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import styles from "../../styles/uniquepage.module.scss";
 import { useRouter } from "next/router";
 import SearchComp from "../../Components/searchComp";
@@ -37,6 +37,8 @@ const Post = () => {
   const [seconds, setSeconds] = useState(0);
 
   const [index, setIndex] = useState(0);
+  const [width, setWidth] = useState(0)
+  const carousel = useRef(null);
 
   useEffect(() => {
     let myInterval = setInterval(() => {
@@ -56,6 +58,10 @@ const Post = () => {
       clearInterval(myInterval);
     };
   }, [time]);
+  useEffect(()=>{
+    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+    console.log(carousel?.current?.scrollWidth)
+  },[])
   useEffect(() => {
     console.log(pid);
     const result = data.nft_data.find((item) => item.id === pid);
@@ -73,7 +79,7 @@ const Post = () => {
       setHours(Number(hour));
     }
     setData(result);
-  }, []);
+  }, [pid]);
   useEffect(() => {
     if (!fetchedData && fetched === false) {
       setTimeout(() => {
@@ -175,13 +181,23 @@ const Post = () => {
           </div>
         </div>
       </div>
-      <div className={styles.carousel}>
+      <div className={styles.display}>
         <span>More like this</span>
-        <div className={styles.display}>
-          {/* {data.nft_data.map((props) => {
-            return <Box {...props} />;
-          })} */}
-        </div>
+        <motion.div
+          className={styles.carousel}
+          ref={carousel}
+          whileTap={{ cursor: "grabbing" }}
+        >
+          <motion.div
+            drag="x"
+            dragConstraints={{ right: 0, left: -width }}
+            className={styles.innerCrousel}
+          >
+            {data.nft_data.map((props) => {
+              return <Box2 className={styles.box} {...props} />;
+            })}
+          </motion.div>
+        </motion.div>
       </div>
       <Footer />
     </Layout>
