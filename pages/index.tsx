@@ -49,10 +49,10 @@ const Home: NextPage = () => {
                 className={styles.img1}
                 style={{ backgroundImage: "url(/stairs.jpeg)" }}
               ></div>
-              <div
+              {/* <div
                 className={styles.img2}
                 style={{ backgroundImage: "url(/stairs.jpeg)" }}
-              ></div>
+              ></div> */}
               <div
                 className={styles.img2}
                 style={{ backgroundImage: "url(/stairs.jpeg)" }}

@@ -26,6 +26,7 @@ const dropDown = ({
         </motion.span>
       </div>
       <motion.ul
+        style={{height:0}}
         animate={{
           height: [
             state ? 42 * data.filters.length : 0,

@@ -19,10 +19,67 @@
         gap: 1.5rem;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         &>div {
+            margin-left: auto;
+            align-self: right;
+            width: 100%;
+            max-width: 490px;
+            .arrows {
+                font-size: 1.5rem;
+                width: 30%;
+                display: flex;
+                justify-content: space-between;
+                margin: auto;
+                margin-top: 0.7rem;
+                svg {
+                    color: hsl(0, 0%, 20%, 0.4);
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            }
+            .desc {
+                display: flex;
+                font-size: 0.65rem;
+                gap: 4px;
+                margin-top: 1.5rem;
+                justify-content: space-between;
+                .prop {
+                    transition: border 0.3s ease-out;
+                    cursor: pointer;
+                    // border-bottom: 2px solid white;
+                    // border-color: hsl(169, 77%, 43%);
+                }
+                @media (min-width: 7420px) {
+                    font-size: 0.9rem;
+                }
+            }
+            .active {
+                transition: border 0.3s ease-out;
+                border-bottom: 2px solid hsl(169, 77%, 43%);
+                padding-bottom: 3px;
+            }
+            .desc_block {
+                border: 1px solid hsl(0, 0%, 20%, 0.2);
+                border-radius: 5px;
+                min-height: 5rem;
+                overflow: hidden;
+                font-size: 0.8rem;
+                padding: 0.7rem;
+                h2 {}
+            }
+            .buttons {
+                display: flex;
+                width: 100%;
+                gap: 1rem;
+                justify-content: space-around;
+                margin-top: 1rem;
+            }
             &:last-of-type {
+                margin: 0;
+                margin-right: auto;
                 display: flex;
                 flex-direction: column;
-                gap: 0.4rem
+                gap: 0.4rem;
             }
             aspect-ratio: 1;
             padding: 0.5rem;
@@ -31,6 +88,7 @@
                 display: flex;
                 align-items: center;
                 height: fit-content;
+                flex-wrap: wrap;
                 gap: 1ch;
                 font-size: 0.7rem;
                 p {
@@ -38,13 +96,28 @@
                     margin: 0;
                     color: blue;
                 }
-                .time {
-                    // background: #000;
-                    border-radius: 5px;
-                    padding: 2px;
-                    color: hsl(0, 0%, 100%);
-                    background: hsl(0, 0%, 30%, 0.5);
-                    font-size: 0.6rem;
+                .time_container {
+                    width: 100%;
+                    display: flex;
+                    gap: 3px;
+                    .time {
+                        border-radius: 5px;
+                        padding: 2px;
+                        color: hsl(0, 0%, 100%);
+                        background: hsl(0, 0%, 30%, 0.5);
+                        font-size: 0.6rem;
+                    }
+                }
+                .price_data {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    span {
+                        font-size: 1.4rem;
+                    }
+                    p {
+                        color: #333;
+                    }
                 }
             }
             .home_details {
@@ -58,7 +131,7 @@
                     gap: 2px;
                     button {
                         border-radius: 5px;
-                        border: 1px solid hsl(0, 0%, 20%, .2);
+                        border: 1px solid hsl(0, 0%, 20%, 0.2);
                         padding: 0;
                         display: flex;
                         gap: 3px;
@@ -72,13 +145,27 @@
                 border-radius: 5px;
                 aspect-ratio: 1;
                 .img {
-                    // background: #000;
                     background-image: url(/hero.jpeg);
                     background-position: center center;
                     background-size: cover;
                     height: 100%;
                     // margin: .5rem;
                 }
+            }
+        }
+    }
+    .carousel {
+        padding: 2rem;
+        // background: #000;
+        width: 100%;
+        height: 30rem;
+        grid-column: span 2;
+        .display {
+            display: block;
+            // overflow-x: scroll;
+            max-width: 100%;
+            &>div {
+                flex-grow: 1;
             }
         }
     }

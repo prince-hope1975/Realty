@@ -41,6 +41,7 @@ const Box = (
   const router = useRouter();
   return (
     <motion.div
+      // whileInView={{ opacity: 1, }}  
       onClick={() => {
         router.push(`/item/${props.id}`);
       }}
