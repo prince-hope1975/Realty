@@ -11,10 +11,23 @@ import Navbar from "../Components/Navbar";
 import { useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import data from "../data/data";
-
+import Upload from "../Components/uploadBtn";
+import { listAll, ref ,getDownloadURL} from "firebase/storage";
+import storage, {writeNFTData} from "../helper/firebaseHelper";
 const Home: NextPage = () => {
+  const [imageList, setImageList] = useState<Array<string>>([])
+  const imageListRef = ref(storage, "images/")
+  useEffect(()=>{
+    listAll(imageListRef).then(res=>{
+     res.items.forEach((item)=>{
+      getDownloadURL(item).then(url=>{
+        setImageList(prev=>[...prev,url])
+      })
+     })
+    })
+  },[])
   const matches = useMediaQuery("(min-width: 400px)");
-  const [state, setStat] = useState(false);
+  const [state, setState] = useState(false);
   useEffect(() => {
     window.localStorage.setItem("current_wallet", "");
   }, []);
@@ -39,12 +52,13 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.bg}></div>
         </section>
+        <Upload />
+        {imageList.map((item)=><>{item}</>)}
         <section className={styles.site_picks}>
           <Navbar />
           <div className={styles.site_pick_image_section}>
             <h3>Site Pick</h3>
             <div className={styles.images}>
-              {/* <Image src={"/stairs.jpeg"} width={300} height={300}/> */}
               <div
                 className={styles.img1}
                 style={{ backgroundImage: "url(/stairs.jpeg)" }}
@@ -110,3 +124,4 @@ const boxData = [
   { head: "Sell", text: "Your Properties will shine in our marketplace." },
 ];
 export default Home;
+// https://firebasestorage.googleapis.com/v0/b/

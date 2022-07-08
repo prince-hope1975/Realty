@@ -59,8 +59,10 @@ const Post = () => {
     };
   }, [time]);
   useEffect(()=>{
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
-    console.log(carousel?.current?.scrollWidth)
+    // @ts-ignore
+    setWidth(carousel?.current?.scrollWidth - carousel.current.offsetWidth);
+    // @ts-ignore
+    console.log(carousel?.current?.scrollWidth);
   },[])
   useEffect(() => {
     console.log(pid);
@@ -194,7 +196,7 @@ const Post = () => {
             className={styles.innerCrousel}
           >
             {data.nft_data.map((props) => {
-              return <Box2 className={styles.box} {...props} />;
+              return <Box2 key={props.id} className={styles.box} {...props} />;
             })}
           </motion.div>
         </motion.div>

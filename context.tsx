@@ -12,18 +12,21 @@ const AppContext = React.createContext(
   {} as {
     dispatch: React.Dispatch<{
       type: "SET_FALLBACK";
-      payload: "myalgo"|"pera";
+      payload: "myalgo" | "pera";
     }>;
     state: any;
     setState: React.Dispatch<React.SetStateAction<{}>>;
+    wallet: any;
+    setWallet: React.Dispatch<React.SetStateAction<{}>>;
     appState: {
-      fallback: null|"myalgo"|"pera";
+      fallback: null | "myalgo" | "pera";
     };
   }
 );
 export const AppProvider = ({ children }: PropsWithChildren) => {
   const [appState, dispatch] = useReducer(reducer, initialState);
   const [state, setState] = useState({});
+  const [wallet, setWallet] = useState({});
   useEffect(()=>{
     console.log(state)
   },[state])
@@ -34,6 +37,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         state,
         setState,
         appState,
+        wallet,
+        setWallet
       }}
     >
       {children}

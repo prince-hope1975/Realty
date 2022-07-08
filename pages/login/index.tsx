@@ -1,23 +1,24 @@
-import React from 'react'
-import Navbar from '../../Components/Navbar'
-import styles from "../../styles/login.module.scss"
-import { WalletBox } from '../../Components/Box'
-import Layout from '../../Components/Layout'
+import React from "react";
+import Navbar from "../../Components/Navbar";
+import styles from "../../styles/login.module.scss";
+import { WalletBox } from "../../Components/Box";
+import Layout from "../../Components/Layout";
 
 const Login = () => {
   return (
     <Layout className={styles.section}>
-        <Navbar className={styles.nav}/>
-        <div className={styles.main} >
-            <h2>
-                Connect Your Algorand Wallet to  Continue
-            </h2>
-            <p>Connect with one of our Available wallet providers or create a new one.</p>
-        </div>
-        <WalletBox dataArr={wallet_props} />
+      <Navbar className={styles.nav} />
+      <div className={styles.main}>
+        <h2>Connect Your Algorand Wallet to Continue</h2>
+        <p>
+          Connect with one of our Available wallet providers or create a new
+          one.
+        </p>
+      </div>
+      <WalletBox dataArr={wallet_props} />
     </Layout>
-  )
-}
+  );
+};
 
 const wallet_props = [
   {
@@ -32,4 +33,4 @@ const wallet_props = [
   },
 ];
 
-export default Login
+export default Login;

@@ -20,7 +20,7 @@ const keypress = async () => {
 
 const DISPENSERACCOUNT =
   "HZ57J3K46JIJXILONBBZOHX6BKPXEM2VVXNRFSUED6DKFD5ZD24PMJ3MVA";
-async function createAsset(algodClient, alice) {
+async function createAsset(algodClient:algosdk.Algodv2, alice: algosdk.Account) {
   console.log("");
   console.log("==> CREATE ASSET");
   //Check account balance
@@ -186,7 +186,11 @@ async function createAsset(algodClient, alice) {
   // }
 }
 
-async function destroyAsset(algodClient, alice, assetID) {
+export async function destroyAsset(
+  algodClient: algosdk.Algodv2,
+  alice: algosdk.Account ,
+  assetID:number
+) {
   console.log("");
   console.log("==> DESTROY ASSET");
   // All of the created assets should now be back in the creators
@@ -245,10 +249,13 @@ async function destroyAsset(algodClient, alice, assetID) {
   // Alice = RA6RAUNDQGHRWTCR5YRL2YJMIXTHWD5S3ZYHVBGSNA76AVBAYELSNRVKEI
   // Bob = YC3UYV4JLHD344OC3G7JK37DRVSE7X7U2NOZVWSQNVKNEGV4M3KFA7WZ44
 }
-async function closeoutAliceAlgos(algodClient, alice) {
+async function closeoutAliceAlgos(
+  algodClient: algosdk.Algodv2,
+  alice: algosdk.Account 
+) {
   console.log("");
   console.log("==> CLOSE OUT ALICE'S ALGOS TO DISPENSER");
-  let accountInfo = await algodClient.accountInformation(alice.addr).do();
+  let accountInfo = await algodClient.accountInformation(alice?.addr).do();
   console.log("Alice Account balance: %d microAlgos", accountInfo.amount);
   const startingAmount = accountInfo.amount;
   // Construct the transaction
@@ -314,7 +321,7 @@ async function closeoutAliceAlgos(algodClient, alice) {
   // Bobs Account balance: 0 microAlgos
 }
 
-const createAccount = function () {
+ const createAccount = function () {
   try {
     let account1_mnemonic =
       "tomato issue pink submit beyond stone banner scout offer various market battle amount mirror arm trust wedding fold satisfy toward trade shock gallery absorb wave";
@@ -337,7 +344,11 @@ const createAccount = function () {
 };
 
 // Function used to print created asset for account and assetid
-const printCreatedAsset = async function (algodClient, account, assetid) {
+const printCreatedAsset = async function (
+  algodClient: algosdk.Algodv2,
+  account: string,
+  assetid: number
+) {
   // note: if you have an indexer instance available it is easier to just use this
   //     let accountInfo = await indexerClient.searchAccounts()
   //    .assetID(assetIndex).do();
@@ -355,7 +366,11 @@ const printCreatedAsset = async function (algodClient, account, assetid) {
   }
 };
 // Function used to print asset holding for account and assetid
-const printAssetHolding = async function (algodClient, account, assetid) {
+const printAssetHolding = async function (
+  algodClient: algosdk.Algodv2,
+  account: string,
+  assetid: number
+) {
   // note: if you have an indexer instance available it is easier to just use this
   //     let accountInfo = await indexerClient.searchAccounts()
   //    .assetID(assetIndex).do();
@@ -372,9 +387,9 @@ const printAssetHolding = async function (algodClient, account, assetid) {
   }
 };
 
-export async function createNFT(alice) {
+export async function createNFT(alice?: algosdk.Account) {
   try {
-    let alice = createAccount();
+    let Alice =alice? alice: createAccount();
     console.log("Press any key when the account is funded");
     await keypress();
     // Connect your client
@@ -394,11 +409,13 @@ export async function createNFT(alice) {
     let algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 
     // CREATE ASSET
-    const { assetID } = await createAsset(algodClient, alice);
+    // @ts-ignore 
+    const { assetID } = await createAsset(algodClient, Alice);
     // DESTROY ASSET
-    await destroyAsset(algodClient, alice, assetID);
+    // await destroyAsset(algodClient, Alice, assetID);
     // CLOSEOUT ALGOS - Alice closes out Alogs to dispenser
-    await closeoutAliceAlgos(algodClient, alice);
+    // @ts-ignore
+    // await closeoutAliceAlgos(algodClient, Alice);
 
     return { assetID };
   } catch (err) {

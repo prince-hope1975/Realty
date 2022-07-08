@@ -37,7 +37,7 @@ const dropDown = ({
       >
         {data.filters.map((filter) => {
           return (
-            <li>
+            <li key={filter}>
               <Checkbox /> {filter}
             </li>
           );

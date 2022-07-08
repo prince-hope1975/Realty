@@ -151,7 +151,9 @@ export const WalletBox = (
           <div
             key={wallet_name}
             onClick={() => {
-              if (appState.fallback !== wallet_name) {
+    const wallet = window.localStorage.getItem("current_wallet");
+
+              if (wallet !== wallet_name) {
                 router.push(`login/${wallet_route}`);
               }
             }}

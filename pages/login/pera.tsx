@@ -6,30 +6,40 @@ import { useGlobalContext } from "../../context";
 const reach = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"));
 
 const Pera = () => {
-  const { appState, dispatch,state, setState } = useGlobalContext();
+  const { appState, dispatch, state, setState, setWallet } = useGlobalContext();
   const router = useRouter();
   useEffect(() => {
-    setTimeout(check, 500);
+    
     reach.setWalletFallback(
       reach.walletFallback({
         providerEnv: "TestNet",
         WalletConnect,
       })
-    );
+      );
+      check();
   }, []);
-  const check = () => {
-    const wallet = window.localStorage.getItem("current_wallet")
+  // useEffect(() => {
+  //   const wallet = window.localStorage.getItem("current_wallet");
+
+  //   if (wallet == "pera") {
+  //     check();
+  //   }
+  // }, []);
+  const check = async () => {
+    const wallet = window.localStorage.getItem("current_wallet");
     console.log("Appstate", wallet);
     if (wallet !== "pera") {
       window.localStorage.setItem("current_wallet", "pera");
       // @ts-ignore
       router.reload();
     } else {
-      reach.getDefaultAccount();
+      const acct = await reach.getDefaultAccount();
+      setWallet(acct);
+      router.push("/");
     }
   };
 
-  return <div onClick={() => reach.getDefaultAccount()}>pera</div>;
+  return <div>pera</div>;
 };
 
 export default Pera;
