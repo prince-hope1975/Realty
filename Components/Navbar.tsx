@@ -43,7 +43,7 @@ const Navbar = (
               navigator.clipboard.writeText(wallet.getAddress());
             }}
           >
-            {wallet.getAddress().toString().substring(0, 6) +
+            {wallet.networkAccount.addr.toString().substring(0, 6) +
               "..." +
               wallet
                 .getAddress()

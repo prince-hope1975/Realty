@@ -20,21 +20,24 @@ const firebaseConfig = {
 // Initialize Firebase
 
 
-export function writeNFTData( imageUrl:string, metadata:metadata, id?:number) {
+export async function writeNFTData(  id:number, imageUrl:string, metadata?:metadata,) {
   const db = getDatabase();
   set(ref(db, "users/" + imageUrl), {
     image: imageUrl,
     data: metadata,
     number: id
+  }).then((res)=>{
+    console.log("server response",res)
   });
 }
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-type metadata = {
+export type metadata = {
     "name": string,
+    "unit_name"?:string,
     "description": string,
-    "image": string,
+    "image"?: string,
     "image_integrity"?: string,
     "properties"?: {
         "simple_property": string,

@@ -12,10 +12,10 @@ const Pera = () => {
     
     reach.setWalletFallback(
       reach.walletFallback({
-        providerEnv: "TestNet",
+        providerEnv: "MainNet",
         WalletConnect,
       })
-      );
+    );
       check();
   }, []);
   // useEffect(() => {

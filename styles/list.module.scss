@@ -16,12 +16,21 @@
     }
   }
   form{
+    width:  clamp(300px, 100vw, 500px);
+    // background: #000;
+    margin: auto;
+    // background: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
+    textarea{
+        width:240px;
+        height: 100%;
+        resize: none;
+    }
   }
 }
 .intro {

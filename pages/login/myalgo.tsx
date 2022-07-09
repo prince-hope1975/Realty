@@ -12,7 +12,7 @@ const Myalgo = () => {
     
     reach.setWalletFallback(
       reach.walletFallback({
-        providerEnv: "TestNet",
+        providerEnv: "MainNet",
         MyAlgoConnect,
       })
       );

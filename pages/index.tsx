@@ -52,8 +52,8 @@ const Home: NextPage = () => {
           </div>
           <div className={styles.bg}></div>
         </section>
-        <Upload />
-        {imageList.map((item)=><>{item}</>)}
+        {/* <Upload /> */}
+        {/* {imageList.map((item)=><><img src={item} alt={item} /></>)} */}
         <section className={styles.site_picks}>
           <Navbar />
           <div className={styles.site_pick_image_section}>

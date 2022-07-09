@@ -4,7 +4,7 @@ import React, {
   useState,
   useReducer,
   useEffect,
-//   DispatchWithoutAction,
+  //   DispatchWithoutAction,
 } from "react";
 import reducer, { initialState } from "./reducer";
 
@@ -15,21 +15,27 @@ const AppContext = React.createContext(
       payload: "myalgo" | "pera";
     }>;
     state: any;
+    showModal: boolean;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
     setState: React.Dispatch<React.SetStateAction<{}>>;
     wallet: any;
     setWallet: React.Dispatch<React.SetStateAction<{}>>;
     appState: {
       fallback: null | "myalgo" | "pera";
     };
+    modalMessage: any;
+    setModalMessage: React.Dispatch<any>;
   }
 );
 export const AppProvider = ({ children }: PropsWithChildren) => {
   const [appState, dispatch] = useReducer(reducer, initialState);
   const [state, setState] = useState({});
   const [wallet, setWallet] = useState({});
-  useEffect(()=>{
-    console.log(state)
-  },[state])
+  const [showModal, setShowModal] = useState(true);
+  const [modalMessage, setModalMessage] = useState("Hello" as any);
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
   return (
     <AppContext.Provider
       value={{
@@ -38,7 +44,11 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         setState,
         appState,
         wallet,
-        setWallet
+        setWallet,
+        modalMessage,
+        setModalMessage,
+        showModal,
+        setShowModal,
       }}
     >
       {children}
