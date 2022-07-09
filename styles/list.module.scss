@@ -1,5 +1,4 @@
 .main {
-
   .nav {
     padding: 1rem;
     h1,
@@ -15,8 +14,8 @@
       display: flex;
     }
   }
-  form{
-    width:  clamp(300px, 100vw, 500px);
+  form {
+    width: clamp(300px, 100vw, 500px);
     // background: #000;
     margin: auto;
     // background: #000;
@@ -26,14 +25,41 @@
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
-    textarea{
-        width:240px;
-        height: 100%;
-        resize: none;
+    textarea {
+      width: 240px;
+      height: 100%;
+      resize: none;
     }
   }
 }
 .intro {
   text-align: center;
   color: #333;
+}
+
+.form {
+  padding: 3rem;
+  .listOnSite {
+    border: 1px solid hsl(0, 0%, 20%,0.2);
+    border-radius: 10px;
+  padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    h2 {
+      color: #333;
+      margin-top: 2rem;
+      &:last-of-type{
+        margin-top: 4rem;
+      }
+    }
+    div {
+      display: flex;
+      gap: 3px;
+    }
+    button{
+      margin:2rem auto;
+
+      // background: #000;
+    }
+  }
 }

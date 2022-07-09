@@ -2,7 +2,7 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import storage from "../helper/firebaseHelper";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { loadStdlib } from "@reach-sh/stdlib";
-import algosdk from "algosdk";
+import Listing from "../Components/popupTemplates/routeToListing";
 /* @ts-ignore */
 import { v4 } from "uuid";
 import { Button } from "@mui/material";
@@ -10,6 +10,7 @@ import { useRef } from "react";
 import { metadata } from "../helper/firebaseHelper";
 import { useGlobalContext } from "../context";
 import isObjectEmpty from "../helper/chekcObj";
+import { writeJson } from "../helper/firebaseHelper";
 
 const reach = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"));
 function Upload(props: PropsWithChildren & { metadata?: metadata }) {
@@ -17,7 +18,8 @@ function Upload(props: PropsWithChildren & { metadata?: metadata }) {
   const [percent, setPercent] = useState(0);
   const [formData, setFormData] = useState({});
   const [img, setImg] = useState("");
-  const { wallet } = useGlobalContext();
+  const { wallet, setModalMessage, setShowModal, setMetadata, metadata } =
+    useGlobalContext();
   const imageRef = useRef();
   async function handleUpload() {
     if (!file) {
@@ -53,16 +55,30 @@ function Upload(props: PropsWithChildren & { metadata?: metadata }) {
             {
               supply: 1,
               decimals: 0,
-              // url: url,
+              // url: { url },
             }
           );
-            
+
           console.log(mintObj);
-          // writeNFTData(mintObj.id, url, props.metadata)
+          const { id } = mintObj;
+
+          setMetadata({
+            ...metadata,
+            id,
+            img: url,
+            owner: wallet.networkAccount.addr,
+            desc: props?.metadata?.description,
+          });
+          displayPopUp(id);
         });
       }
     );
   }
+
+  const displayPopUp = (id?: number) => {
+    setShowModal(true);
+    setModalMessage(<Listing id={id} />);
+  };
 
   // Handles input change event and updates state
   function handleChange(event: any) {
@@ -74,11 +90,29 @@ function Upload(props: PropsWithChildren & { metadata?: metadata }) {
     setFormData(form);
   }
 
-// useEffect(()=>{
-//   console.log(
-//     reach.bigNumberToNumber({ _hex: "0x2fd4b9f5", _isBigNumber: true })
-//   );
-// })
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       console.log("Loading metadata");
+  //       const val = await writeJson(
+  //         2,
+  //         {
+  //           desc: "hello",
+  //           id: 1,
+  //           img: "hello",
+  //           owner: "me",
+  //           previous_prices: [0],
+  //           price: 0,
+  //           time_in_secs: 0,
+  //         },
+  //         "metadata.json"
+  //       );
+  //       console.log("val",val);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   })();
+  // }, []);
   return (
     <>
       <input
@@ -111,7 +145,7 @@ function Upload(props: PropsWithChildren & { metadata?: metadata }) {
           MINT
         </Button>
       )}
-     {!(percent==0) && <p>{percent} % done</p>}
+      {!(percent == 0) && <p>{percent} % done</p>}
     </>
   );
 }

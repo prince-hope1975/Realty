@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../Components/Navbar";
-import { useGlobalContext } from "../context";
-import styles from "../styles/list.module.scss";
+import Navbar from "../../Components/Navbar";
+import { useGlobalContext } from "../../context";
+import styles from "../../styles/list.module.scss";
 import {
   Input,
   TextareaAutosize,
@@ -9,11 +9,16 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import Upload from "../Components/uploadBtn";
+import Upload from "../../Components/uploadBtn";
 
 const List = () => {
-  const { wallet } = useGlobalContext();
-  const [info, setInfo] = useState({ name: "", desc: "", img: "", unit_name : "" });
+  const { wallet, metadata, setMetadata } = useGlobalContext();
+  const [info, setInfo] = useState({
+    name: "",
+    desc: "",
+    img: "",
+    unit_name: "",
+  });
   const ariaLabel = { "aria-label": "description" };
   useEffect(() => {
     (async () => {
@@ -59,7 +64,6 @@ const List = () => {
           onChange={(e) => setInfo({ ...info, desc: e.target.value })}
           // style={{ width: 200 }}
         />{" "}
-        {/* <Input placeholder="NAME"  inputProps={ariaLabel} /> */}
         <Upload
           metadata={{
             name: info.name,
