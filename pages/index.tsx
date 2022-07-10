@@ -8,23 +8,44 @@ import SwipableSection from "../Components/Swippable";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
-import { useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import Layout from "../Components/Layout";
-import data from "../data/data";
+import dataObj from "../data/data";
+import { fetchDb } from "../helper/firebaseHelper";
 import Upload from "../Components/uploadBtn";
 import { listAll, ref ,getDownloadURL} from "firebase/storage";
 import storage, {writeNFTData} from "../helper/firebaseHelper";
-const Home: NextPage = () => {
+import { useGlobalContext } from "../context";
+import { loadStdlib } from "@reach-sh/stdlib";
+const reach = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"));
+export async function getStaticProps() {
+  // Call an external API endpoint to get posts
+  const res = await fetchDb();
+  // const posts = await res.json();
+
+  // By returning { props: { posts } }, the Blog component
+  // will receive `posts` as a prop at build time
+  return {
+    props: {
+      posts: JSON.stringify(res),
+    },
+  };
+}
+// @ts-ignore
+const Home: NextPage = ({posts}:PropsWithChildren) => {
   const [imageList, setImageList] = useState<Array<string>>([])
   const imageListRef = ref(storage, "images/")
+  const {data,setData} = useGlobalContext()
   useEffect(()=>{
-    listAll(imageListRef).then(res=>{
-     res.items.forEach((item)=>{
-      getDownloadURL(item).then(url=>{
-        setImageList(prev=>[...prev,url])
-      })
-     })
-    })
+  (async()=>{
+    
+      // const post = await fetchDb();
+      console.log("posts", JSON.parse(posts));
+  })()
+  const post =JSON.parse(posts)
+  // @ts-ignore
+  setData({ ...dataObj, nft_data: Object.keys(post).map((key)=>{return { ...post[key].data, id: reach["bigNumberToNumber"](post[key].data.id) };}) });
+  
   },[])
   const matches = useMediaQuery("(min-width: 400px)");
   const [state, setState] = useState(false);
@@ -85,18 +106,21 @@ const Home: NextPage = () => {
                 <span>
                   Listed By: <Link href="">John Doe</Link>
                 </span>
-                <p>List Price: 1000 Algo</p>
+                <p>List Price: 10 Algo</p>
               </div>
-              <div className={styles.details}>View Details</div>
+              <div className={styles.details}>
+                <Link href="/item/803025966">View Details</Link>
+              </div>
             </div>
           </div>
         </section>
-        <section className={styles.top_propertes}>
+        <section id="buy" className={styles.top_propertes}>
           <h3>Top Properties</h3>
           {matches ? (
             <div className={styles.show_case}>
-              {data.nft_data.map((props)=>{
-                return <Box key={props.id + props.desc} {...props} />
+              {data.nft_data?.map((props) => {
+                console.log("props", props);
+                return <Box key={props.id + props.desc} {...props} />;
               })}
             </div>
           ) : (
@@ -123,5 +147,23 @@ const boxData = [
   { head: "Buy", text: "Buy properties on the blockchain." },
   { head: "Sell", text: "Your Properties will shine in our marketplace." },
 ];
+
+export type data = {
+  nft_data: {
+    id: string;
+    img: string;
+    price: number;
+    time_in_secs: number;
+    desc: string;
+    owner: string;
+    previous_prices: number[];
+  }[];
+  descriptive_data: string[];
+  dropDown: {
+    id: string;
+    name: string;
+    filters: string[];
+  }[];
+};
 export default Home;
 // https://firebasestorage.googleapis.com/v0/b/

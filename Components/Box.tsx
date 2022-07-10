@@ -15,7 +15,7 @@ const Box = (
   }
 ) => {
   const { img, price, time_in_secs, owner, desc } = props;
-  const time = new Date(time_in_secs * 1000).toISOString().substring(11, 19);
+  const time = new Date(time_in_secs)?.toISOString().substring(11, 19);
   const [hour, min, sec] = time.split(":");
   const [hours, setHours] = useState(Number(min));
   const [minutes, setMinutes] = useState(Number(min));
@@ -39,6 +39,7 @@ const Box = (
     };
   });
   const router = useRouter();
+  const {wallet} = useGlobalContext()
   return (
     <motion.div
       // whileInView={{ opacity: 1, }}
@@ -59,7 +60,11 @@ const Box = (
         }}
       >
         <div className={styles.owner}>
-          <span>owner</span> : @{owner}
+          <span>owner</span> : @
+        {(owner == wallet?.networkAccount?.addr) ?"You": <p style={{ display: "inline" }}>
+            {owner.toString().substring(0, 5)}...
+            {owner.toString().substring(owner.length - 5, owner.length)}
+          </p>}
         </div>
         <div className={styles.secondary_area}>
           <span>Ends in</span> {hours}h {minutes}m {seconds}s
@@ -72,14 +77,15 @@ const Box = (
   );
 };
 export const Box2 = (
-  props: PropsWithChildren & MotionProps & {
-    id: string;
-    img: string;
-    price: number;
-    desc: string;
-    owner: string;
-    className?: string;
-  }
+  props: PropsWithChildren &
+    MotionProps & {
+      id: string;
+      img: string;
+      price: number;
+      desc: string;
+      owner: string;
+      className?: string;
+    }
 ) => {
   const { img, price, owner, desc, id, className } = props;
   const router = useRouter();
@@ -97,7 +103,12 @@ export const Box2 = (
         }}
       >
         <div className={styles.owner}>
-          <span>Home # {id} </span> <p>@{owner}</p>
+          <span>Home # {id} </span>{" "}
+          <p>
+            {" "}
+            @{owner.toString().substring(0, 5)}...
+            {owner.toString().substring(owner.length - 5, owner.length)}
+          </p>
         </div>
         <div className={styles.secondary_area}>
           <span>Price</span> {price} Algo
@@ -151,7 +162,7 @@ export const WalletBox = (
           <div
             key={wallet_name}
             onClick={() => {
-    const wallet = window.localStorage.getItem("current_wallet");
+              const wallet = window.localStorage.getItem("current_wallet");
 
               if (wallet !== wallet_name) {
                 router.push(`login/${wallet_route}`);

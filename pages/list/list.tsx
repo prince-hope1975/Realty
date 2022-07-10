@@ -11,11 +11,13 @@ import {
 } from "@mui/material";
 import { Button } from "@mui/material";
 import * as backend from "../../smartcontract/build/index.main.mjs";
-import {writeJson} from "../../helper/firebaseHelper";
-import Listing from "../../Components/popupTemplates/Listing"
+import { writeJson } from "../../helper/firebaseHelper";
+import Listing from "../../Components/popupTemplates/Listing";
+import { useRouter } from "next/router";
 const reach = loadStdlib((process.env.REACH_CONNECTOR_MODE = "ALGO"));
 
 const List = () => {
+  const Router = useRouter();
   const { setMetadata, metadata, wallet, setShowModal, setModalMessage } =
     useGlobalContext();
   const [time, setTime] = useState({
@@ -61,53 +63,55 @@ const List = () => {
   const timeout = () => {
     setModalMessage("The contract has reached the timeout");
     setShowModal(true);
-    setTimeout(() => {
-      setShowModal(false);
-    }, 5000);
   };
   const showOutcome = () => {};
   useEffect(() => {
     if (submit) {
-      (async()=>{
-      try {
-        setMetadata({
-          ...metadata,
-          price: price,
-          time_in_secs: totalTime.totalTimeFrontend,
-          previous_prices: [...metadata["previous_prices"], price],
-        });
-        window.localStorage.setItem("reach-metadata", JSON.stringify(metadata));
-        const Creator = wallet.contract(backend);
-       Promise.all([
-         backend.Creator(Creator, {
-           getSale,
-           seeBid,
-           timeout,
-           showOutcome,
-         }),
-       ])
-         .then(([item]) => {
-           console.log(item);
-         })
-         .catch((e) => console.log(e));
-        const contract = await Creator.getInfo();
-        console.log("contract", contract);
-        await writeJson(
-          metadata.id,
-          {
+      (async () => {
+        try {
+          setMetadata({
             ...metadata,
-            contractInfo: contract,
             price: price,
             time_in_secs: totalTime.totalTimeFrontend,
             previous_prices: [...metadata["previous_prices"], price],
-          },
-          metadata.img
-        );
-        setShowModal(true);
-        setModalMessage(<Listing id={metadata.id} />);
-      } catch (error) {
-        console.log(error)
-      } })()
+          });
+          window.localStorage.setItem(
+            "reach-metadata",
+            JSON.stringify(metadata)
+          );
+          const Creator = wallet.contract(backend);
+          Promise.all([
+            backend.Creator(Creator, {
+              getSale,
+              seeBid,
+              timeout,
+              showOutcome,
+            }),
+          ])
+            .then(([item]) => {
+              console.log(item);
+            })
+            .then(() => Router.push("/"))
+            .catch((e) => console.log(e));
+          const contract = await Creator.getInfo();
+          console.log("contract", contract);
+          await writeJson(
+            metadata.id,
+            {
+              ...metadata,
+              contractInfo: contract,
+              price: price,
+              time_in_secs: totalTime.totalTimeFrontend,
+              previous_prices: [...metadata["previous_prices"], price],
+            },
+            metadata.img
+          );
+          setModalMessage("Successfully listed the item");
+          setShowModal(true);
+        } catch (error) {
+          console.log(error);
+        }
+      })();
     }
   }, [totalTime]);
   const [price, setPrice] = useState(0);

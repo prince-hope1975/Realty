@@ -26,7 +26,7 @@ const Navbar = (
             <Link href="list">List</Link>
           </li>
           <li>
-            <Link href="buy">Buy</Link>
+            <Link href="#buy">Buy</Link>
           </li>
         </ul>
       )}

@@ -40,7 +40,7 @@ export const main = Reach.App(() => {
     const [endit, highestBidder, lastPrice, currentPrice] =
     parallelReduce([true, Creator, 0, reservePrice])
         .invariant(balance(nftId) == amt && balance() == lastPrice)
-        .while(endit && lastConsensusTime() <= end)
+        .while( lastConsensusTime() <= end)
         // .api(
         //     T.endContract,
         //     () => check(this == Creator),

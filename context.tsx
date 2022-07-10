@@ -7,6 +7,7 @@ import React, {
   //   DispatchWithoutAction,
 } from "react";
 import reducer, { initialState } from "./reducer";
+import { data } from "./pages";
 export type meta = {
   id: number;
   img: string;
@@ -15,7 +16,7 @@ export type meta = {
   desc: string | undefined;
   owner: string;
   previous_prices: number[];
-  contractInfo?:any
+  contractInfo?: any;
 };
 
 const AppContext = React.createContext(
@@ -37,6 +38,8 @@ const AppContext = React.createContext(
     setModalMessage: React.Dispatch<any>;
     metadata: meta;
     setMetadata: React.Dispatch<React.SetStateAction<meta>>;
+    setData: React.Dispatch<React.SetStateAction<data>>;
+    data: data;
   }
 );
 export const AppProvider = ({ children }: PropsWithChildren) => {
@@ -44,6 +47,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
   const [state, setState] = useState({});
   const [wallet, setWallet] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [data, setData] = useState({} as data);
   const [modalMessage, setModalMessage] = useState("Hello" as any);
   const [metadata, setMetadata] = useState({
     id: 0,
@@ -71,6 +75,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
         showModal,
         setShowModal,
         metadata,
+        data,
+        setData,
         // @ts-ignore
         setMetadata,
       }}

@@ -3,13 +3,14 @@ import styles from "../../styles/uniquepage.module.scss";
 import { useRouter } from "next/router";
 import SearchComp from "../../Components/searchComp";
 import Navbar from "../../Components/Navbar";
-import data from "../../data/data";
+// import data from "../../data/data";
 import Layout from "../../Components/Layout";
 import Footer from "../../Components/Footer";
 import { Button } from "@mui/material";
 import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
 import { MotionProps } from "framer-motion";
 import Box, { Box2 } from "../../Components/Box";
+import { useGlobalContext } from "../../context";
 import {
   AiOutlineMail,
   AiOutlineHeart,
@@ -40,6 +41,8 @@ const Post = () => {
   const [width, setWidth] = useState(0)
   const carousel = useRef(null);
 
+  const {data} = useGlobalContext();
+
   useEffect(() => {
     let myInterval = setInterval(() => {
       if (seconds > 0) {
@@ -66,7 +69,7 @@ const Post = () => {
   },[])
   useEffect(() => {
     console.log(pid);
-    const result = data.nft_data.find((item) => item.id === pid);
+    const result = data.nft_data.find((item) =>{console.log("id/pid",item.id, pid); return Number(item.id) === Number(pid);});
     if (!result) {
       console.log("result", result);
       setFetched(false);
@@ -90,6 +93,20 @@ const Post = () => {
       }, 4000);
     }
   }, [fetchedData, fetched]);
+  const handleBuy= ()=>{
+
+  }
+  const BuyPopUp = () => {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.popup}
+      >
+
+      </motion.div>)
+  }
   if (!fetchedData && fetched === false) {
     return <>404 Page not found</>;
   }
@@ -145,7 +162,7 @@ const Post = () => {
             </div>
           </div>
           <div className={styles.desc}>
-            {data.descriptive_data.map((prop, indexed) => {
+            {data?.descriptive_data?.map((prop, indexed) => {
               return (
                 <div
                   onClick={() => setIndex(indexed)}
@@ -178,7 +195,7 @@ const Post = () => {
           </div>
 
           <div className={styles.buttons}>
-            <Button variant="contained">Buy Now</Button>
+            <Button variant="contained" onClick={handleBuy} >Buy Now</Button>
             <Button variant="outlined">Make Offer</Button>
           </div>
         </div>
@@ -195,8 +212,8 @@ const Post = () => {
             dragConstraints={{ right: 0, left: -width }}
             className={styles.innerCrousel}
           >
-            {data.nft_data.map((props) => {
-              return <Box2 key={props.id} className={styles.box} {...props} />;
+            {data?.nft_data?.map((props) => {
+              return <Box2 key={props?.id} className={styles.box} {...props} />;
             })}
           </motion.div>
         </motion.div>

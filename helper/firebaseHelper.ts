@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue, get, child } from "firebase/database";
 import { meta } from "../context";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -44,12 +44,34 @@ export async function writeJson(id: number, metadata: meta, imageUrl: string) {
       "https://nft-algo-default-rtdb.asia-southeast1.firebasedatabase.app/"
     );
     console.log("db", db);
-    let response =await  set(ref(db, "users/" + id), {
+    let response = await set(ref(db, "users/" + id), {
       data: metadata,
     });
     return response;
   } catch (e) {
     console.log(e);
+  }
+}
+
+export async function fetchDb() {
+  try {
+    const db = getDatabase(
+      app,
+      "https://nft-algo-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    );
+    console.log("db", db);
+    const dbRef = ref(db);
+    const snapshot = await get(child(dbRef, `users/`));
+
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+    return (snapshot.val())
+  } catch (e) {
+    console.log(e);
+    return { error: e };
   }
 }
 
